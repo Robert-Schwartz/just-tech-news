@@ -1,17 +1,32 @@
+/*  ===============================================================
+the User model inherits functionality from the Sequelize Model class. .findAll() is one of the Model class's methods. The .findAll() method lets us query all of the users from the user table in the database, and is the JavaScript equivalent of the following SQL query:
+
+Sequelize is a JavaScript Promise-based library, meaning we get to use .then() with all of the model methods!
+
+REST-ful API notes:
+There are a number of guidelines that go into creating a RESTful API,
+there are three guidelines we can put to use:
+
+1.  Name your endpoints in a way that describes the data you're interfacing with, such as /api/users.
+
+2.  Use HTTP methods like GET, POST, PUT, and DELETE to describe the action you're performing to interface with that endpoint; for example, GET /api/users means you should expect to receive user data.
+
+3.  Use the proper HTTP status codes like 400, 404, and 500 to indicate errors in a request.
+===================================================================== */
+
+/* require router and User object:
 const router = require('express').Router();
 const { User } = require('../../models');
+*/
 
 // API END POINTS accessible at the /api/users URL
 
-// GET /api/users
+// GET/api/users
 // =====================================
 router.get('/', (req, res) => {
     // Access our User model and run .findAll() method)
     //select all users from the user table in the database and send it back as JSON
-    //uses attributes to remove password from view
-    User.findAll({
-        attributes: { exclude: ['password'] }
-    })
+    User.findAll()
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
             console.log(err);
@@ -25,7 +40,6 @@ router.get('/', (req, res) => {
 // equal to:  SELECT * FROM users WHERE id = 1
 router.get('/:id', (req, res) => {
     User.findOne({
-        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         }
@@ -118,25 +132,5 @@ router.delete('/:id', (req, res) => {
 });
 
 
-
 // Export Router!
-module.exports = router;
-
-
-
-/*  ===============================================================
-the User model inherits functionality from the Sequelize Model class. .findAll() is one of the Model class's methods. The .findAll() method lets us query all of the users from the user table in the database, and is the JavaScript equivalent of the following SQL query:
-
-Sequelize is a JavaScript Promise-based library, meaning we get to use .then() with all of the model methods!
-
-REST-ful API notes:
-There are a number of guidelines that go into creating a RESTful API,
-there are three guidelines we can put to use:
-
-1.  Name your endpoints in a way that describes the data you're interfacing with, such as /api/users.
-
-2.  Use HTTP methods like GET, POST, PUT, and DELETE to describe the action you're performing to interface with that endpoint; for example, GET /api/users means you should expect to receive user data.
-
-3.  Use the proper HTTP status codes like 400, 404, and 500 to indicate errors in a request.
-
-  =================================================================== */
+// module.exports = router;

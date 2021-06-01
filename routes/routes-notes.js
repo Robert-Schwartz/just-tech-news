@@ -26,7 +26,10 @@ const { User } = require('../../models');
 router.get('/', (req, res) => {
     // Access our User model and run .findAll() method)
     //select all users from the user table in the database and send it back as JSON
-    User.findAll()
+    //uses attributes key to remove values "password" from view. can add more items into the array
+    User.findAll({
+        attributes: { exclude: ['password'] }
+    })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
             console.log(err);

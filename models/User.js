@@ -1,11 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+//hash password with bcrypt npm packaeg
+const bcrypt = require('bcrypt');
+
 
 class User extends Model { }
 // See model-example file for review
 
 User.init(
-    {// TABLE COLUMN DEFINITIONS GO HERE
+    {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -32,13 +35,21 @@ User.init(
             }
         }
     },
-    { //TABLE CONFIGURATION OPTIONS GO HERE
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'user'
-    }
+    {
+        hooks: {
+            // set up beforeCreate lifecycle "hook" functionality
+            async beforeCreate(newUserData) {
+                /* In the bcrypt hash function, we pass in the userData object that contains the plaintext password in the password property. We also pass in a saltRound value of 10. */
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                return newUserData;
+            },
+            },
+            sequelize,
+            timestamps: false,
+            freezeTableName: true,
+            underscored: true,
+            modelName: 'user'
+        }
 );
 
 module.exports = User;

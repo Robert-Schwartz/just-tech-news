@@ -6,17 +6,22 @@ Also, note that second use of router.use(). This is so if we make a request to a
 
 Now when we import the routes to server.js, they'll already be packaged and ready to go with this one file! Let's get server.js set up now.
 
-Make sure that the server.js file you created is at the root of the entire project. 
+Make sure that the server.js file you created is at the root of the entire project.
 */
 
 const router = require('express').Router();
 
 const apiRoutes = require('./api');
 
+const homeRoutes = require('./home-routes.js');
+
+
 router.use('/api', apiRoutes);
 
 router.use((req, res) => {
     res.status(404).end();
 });
+
+router.use('/', homeRoutes);
 
 module.exports = router;

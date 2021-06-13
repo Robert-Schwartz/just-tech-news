@@ -2,9 +2,7 @@
 The main.handlebars file used three curly brackets as {{{ body }}},
 but here we're only using two brackets as {{ title}}. Why is that?
 The difference is that two brackets will convert HTML characters to strings. For instance, < would become &lt;. Three
-    brackets, on the other hand, will render the data as HTML. --}}
-
-    <ol class="post-list">
+    brackets, on the other hand, will render the data as HTML. --}} <ol class="post-list">
     {{#each posts as |post|}}
     <li>
         <article class="post">

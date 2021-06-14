@@ -2,7 +2,6 @@
 
     Important!  Layouts is a reserved folder
 
-
     Your file/folder structure MUST be set up this way for Handlebars.js to work correctly. You will always have a main layout located at (and named) views/layouts/main.handlebars.
 
     All other template files will go directly in the views folder (views). -->
@@ -19,18 +18,18 @@
 
 <body>
     <div class="wrapper">
-<header>
-    <h1>
-        <a href="/">Just Tech News</a>
-    </h1>
-    <nav>
-        <a href="/login">login</a>
-    </nav>
-    <nav>
-        <button id="logout" class="btn-no-style">logout</button>
-        <a href="/login">login</a>
-    </nav>
-</header>
+        <header>
+            <h1>
+                <a href="/">Just Tech News</a>
+            </h1>
+            <nav>
+                {{#if loggedIn}}
+                <button id="logout" class="btn-no-style">logout</button>
+                {{else}}
+                <a href="/login">login</a>
+                {{/if}}
+            </nav>
+        </header>
         <main>
             {{{ body }}}
         </main>
@@ -38,7 +37,10 @@
             Thanks for visiting!
         </footer>
     </div>
-<script src="/javascript/logout.js"></script>
+
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
 </body>
 
 </html>

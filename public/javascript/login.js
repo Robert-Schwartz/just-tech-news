@@ -25,7 +25,6 @@ async function loginFormHandler(event) {
 }
 // Sign up Request
 // =====================================================
-
 async function signupFormHandler(event) {
     event.preventDefault();
 

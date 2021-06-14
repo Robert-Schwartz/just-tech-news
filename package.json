@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "jest",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,6 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^25.5.4"
   }
 }

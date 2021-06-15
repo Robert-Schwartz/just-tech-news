@@ -1,5 +1,3 @@
-// Login Request
-// =====================================================
 async function loginFormHandler(event) {
     event.preventDefault();
 
@@ -17,14 +15,13 @@ async function loginFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/dashboard/');
         } else {
             alert(response.statusText);
         }
     }
 }
-// Sign up Request
-// =====================================================
+
 async function signupFormHandler(event) {
     event.preventDefault();
 
@@ -44,7 +41,7 @@ async function signupFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/dashboard');
+            document.location.replace('/dashboard/');
         } else {
             alert(response.statusText);
         }

@@ -13,13 +13,16 @@ router.get('/', (req, res) => {
         });
 });
 
+// ========= /api/users/:id
 router.get('/:id', (req, res) => {
     User.findOne({
+        // selecting what I want to see
         attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         },
         include: [
+            // joining Post to User table, then Comment to Users, the Post to Votes
             {
                 model: Post,
                 attributes: ['id', 'title', 'post_url', 'created_at']
@@ -37,6 +40,7 @@ router.get('/:id', (req, res) => {
                 attributes: ['title'],
                 through: Vote,
                 as: 'voted_posts'
+                // as is creating a new alias
             }
         ]
     })
@@ -53,6 +57,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// /api/users/
 router.post('/', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
